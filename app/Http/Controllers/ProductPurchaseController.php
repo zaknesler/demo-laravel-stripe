@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Stripe\Charge;
 use Illuminate\Http\Request;
+use App\Billing\StripePaymentGateway;
 
 class ProductPurchaseController extends Controller
 {
@@ -25,17 +26,25 @@ class ProductPurchaseController extends Controller
             $charge = Charge::create([
                 'amount' => $product->price,
                 'currency' => 'usd',
-                'description' => $product->name,
                 'customer' => $customer['id'],
-                'receipt_email' => request()->user()->email,
+                'receipt_email' => $customer['email'],
                 'metadata' => [
                     'product_id' => $product->id,
                 ],
             ]);
 
-            return $charge;
+            $order = request()->user()->orders()->create([
+                'charge_id' => $charge['id'],
+                'charged_at' => $charge['created'],
+                'charge_amount' => $product->price,
+                'card_last_four' => $charge['source']['last4'],
+            ]);
+
+            $order->products()->attach($product);
+
+            return $order;
         } catch (\Exception $exception) {
-            return response()->json(['message' => $exception->getMessage()], 500);
+            return response()->json(['message' => $exception->getMessage()], 403);
         }
     }
 }

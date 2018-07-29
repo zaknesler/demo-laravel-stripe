@@ -25,5 +25,7 @@
         </div>
     </div>
 
-    <purchase-product :product="{{ $product }}"></purchase-product>
+    @auth
+        <purchase-product :product="{{ $product }}"></purchase-product>
+    @endauth
 @endsection

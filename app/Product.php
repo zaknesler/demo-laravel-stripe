@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\{ Order, OrderProduct };
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -18,4 +19,9 @@ class Product extends Model
         'image',
         'stock',
     ];
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)->using(OrderProduct::class);
+    }
 }

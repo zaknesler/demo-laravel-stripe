@@ -11,7 +11,7 @@
                         <div class="flex items-center">
                             <div class="font-semibold">1</div>
 
-                            <svg class="mx-2 w-3 h-3 text-grey-darker fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
+                            <svg class="mx-2 w-2 h-2 text-grey-darker fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
 
                             <div class="text-left">{{ product.name }}</div>
                         </div>
@@ -39,10 +39,6 @@
                         <span>{{ success ? 'Success' : 'Purchase' }}</span>
                     </div>
                 </button>
-
-                <div v-if="output" class="mt-8 p-4 text-sm border rounded bg-grey-lightest font-mono text-left overflow-x-auto">
-                    <pre v-html="output"></pre>
-                </div>
             </div>
         </div>
     </div>
@@ -72,8 +68,6 @@
 
                 pending: false,
                 success: false,
-
-                output: '',
 
                 error: ''
             }
@@ -112,9 +106,10 @@
                         }
 
                         axios.post(`/products/${this.product.id}/purchase`, {token: token.id})
-                            .then((response) => {
+                            .then(({ data }) => {
                                 this.success = true
-                                this.output = response.data
+
+                                console.log(data)
                             })
                             .catch(({ response }) => {
                                 this.error = response.data.message
