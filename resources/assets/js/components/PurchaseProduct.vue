@@ -109,7 +109,7 @@
                             .then(({ data }) => {
                                 this.success = true
 
-                                console.log(data)
+                                window.location.href = `/orders/${data.id}`
                             })
                             .catch(({ response }) => {
                                 this.error = response.data.message
