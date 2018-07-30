@@ -2,8 +2,7 @@
 
 namespace App;
 
-use App\Order;
-use App\Product;
+use App\{ Order, Product };
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class OrderProduct extends Pivot

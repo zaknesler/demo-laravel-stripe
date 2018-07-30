@@ -13,7 +13,7 @@
                 <div class="flex flex-col md:flex-row">
                     <img class="block w-48 h-48 rounded select-none pointer-events-none" src="{{ $product->image }}" alt="Product Image" />
 
-                    <div class="mt-4 md:mb-0 md:ml-4">
+                    <div class="mt-4 md:mt-0 md:ml-4">
                         <div class="text-grey-darkest text-xl font-semibold mb-2">{{ $product->name }}</div>
 
                         <div class="mb-4">{{ $product->description }}</div>

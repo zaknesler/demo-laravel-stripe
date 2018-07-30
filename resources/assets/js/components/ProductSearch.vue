@@ -11,7 +11,7 @@
                         <div class="ml-4">
                             <div class="text-grey-darkest font-semibold mb-2" v-text="product.name"></div>
 
-                            <div class="text-grey-darker" v-text="'$' + (product.price / 100).toFixed(2)"></div>
+                            <div class="text-grey-darker" v-text="'$' + (product.price / 100).format(2)"></div>
                         </div>
 
                         <div class="flex-1 text-right ml-4 self-center">

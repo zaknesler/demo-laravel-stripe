@@ -5,7 +5,6 @@ namespace App;
 use App\Order;
 use Stripe\Customer;
 use Illuminate\Notifications\Notifiable;
-use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable

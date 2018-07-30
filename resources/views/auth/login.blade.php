@@ -50,7 +50,7 @@
 
                         <div class="block mb-4">
                             <label class="flex items-center select-none" for="remember">
-                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
+                                <input class="checkbox-slider" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
 
                                 <span class="text-sm ml-2">Keep me signed in</span>
                             </label>
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="text-center text-sm text-grey-dark">
-                            Don't have an account? <a class="font-semibold text-grey-darker no-underline hover:underline" href="{{ route('register') }}">Sign up</a>.
+                            Don't have an account? <a class="font-semibold text-grey-darker no-underline hover:underline" href="{{ route('register') }}">Sign up</a>
                         </div>
                     </form>
                 </div>

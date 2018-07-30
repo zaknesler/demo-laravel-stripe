@@ -2,8 +2,7 @@
 
 namespace App;
 
-use App\Product;
-use App\OrderProduct;
+use App\{ Order, OrderProduct };
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model

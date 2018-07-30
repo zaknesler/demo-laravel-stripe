@@ -16,7 +16,7 @@
                             <div class="text-left">{{ product.name }}</div>
                         </div>
 
-                        <div class="ml-4 font-mono text-grey-dark">${{ (product.price / 100).toFixed(2) }}</div>
+                        <div class="ml-4 font-mono text-grey-dark">${{ (product.price / 100).format(2) }}</div>
                     </div>
 
                     <div class="w-full border rounded bg-grey-lightest p-4" ref="card"></div>
@@ -30,14 +30,8 @@
                     </transition>
                 </div>
 
-                <button :class="{ 'opacity-75 select-none pointer-events-none': buttonDisabled, 'bg-green-dark hover:bg-green-dark': success, 'bg-blue hover:bg-blue-dark': !success }" class="block mx-auto w-32 h-10 text-center flex items-center justify-center focus:outline-none text-white rounded" @click.prevent="makePurchase">
-                    <div v-if="pending && !success" class="mx-auto loader"></div>
-
-                    <div v-else class="flex items-center justify-center">
-                        <svg v-if="success" class="w-3 h-3 text-blue-lightest fill-current mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
-
-                        <span>{{ success ? 'Success' : 'Purchase' }}</span>
-                    </div>
+                <button :disabled="buttonDisabled" :class="{ 'opacity-75 select-none pointer-events-none cursor-not-allowed': buttonDisabled }" class="block mx-auto text-center bg-blue hover:bg-blue-dark flex items-center justify-center focus:outline-none text-white rounded px-6 py-3" @click.prevent="makePurchase">
+                    <div v-text="processing ? 'Processing...' : 'Purchase'"></div>
                 </button>
             </div>
         </div>
@@ -47,14 +41,14 @@
 <script>
     const tailwindConfig = require('../../../../tailwind.js')
 
-    let style = {
+    const style = {
         base: {
             fontFamily: tailwindConfig.fonts.sans.toString(),
             color: tailwindConfig.colors['grey-darker']
         }
     }
 
-    let stripe = Stripe(process.env.MIX_STRIPE_KEY),
+    const stripe = Stripe(process.env.MIX_STRIPE_KEY),
         elements = stripe.elements()
 
     export default {
@@ -66,8 +60,7 @@
 
                 buttonDisabled: true,
 
-                pending: false,
-                success: false,
+                processing: false,
 
                 error: ''
             }
@@ -107,21 +100,18 @@
 
                         axios.post(`/products/${this.product.id}/purchase`, {token: token.id})
                             .then(({ data }) => {
-                                this.success = true
-
                                 window.location.href = `/orders/${data.id}`
                             })
                             .catch(({ response }) => {
                                 this.error = response.data.message
                                 this.setWorking(false)
-                                this.success = false
                             })
                     })
             },
 
             setWorking(value) {
                 this.buttonDisabled = value
-                this.pending = value
+                this.processing = value
                 this.card.update({ disabled: value })
             }
         }

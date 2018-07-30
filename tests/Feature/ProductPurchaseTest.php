@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Order;
 use App\Product;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -22,10 +23,7 @@ class ProductPurchaseTest extends TestCase
         ]);
 
         $response->assertSuccessful();
-        $response->assertJson([
-            'amount' => 1000,
-            'status' => 'succeeded',
-        ]);
+        $this->assertEquals(1, Order::count());
     }
 
     /** @test */
@@ -42,5 +40,6 @@ class ProductPurchaseTest extends TestCase
         $response->assertJson([
             'message' => 'Your card was declined.',
         ]);
+        $this->assertEquals(0, Order::count());
     }
 }

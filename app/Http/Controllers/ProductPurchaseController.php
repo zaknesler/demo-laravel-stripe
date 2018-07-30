@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Product;
 use Stripe\Charge;
 use Illuminate\Http\Request;
-use App\Billing\StripePaymentGateway;
 
 class ProductPurchaseController extends Controller
 {
@@ -43,8 +42,10 @@ class ProductPurchaseController extends Controller
             $order->products()->attach($product);
 
             return $order;
-        } catch (\Exception $exception) {
+        } catch (\Stripe\Error\Base $exception) {
             return response()->json(['message' => $exception->getMessage()], 403);
+        } catch (\Exception $exception) {
+            return response()->json(['message' => 'Something went wrong.'], 403);
         }
     }
 }
