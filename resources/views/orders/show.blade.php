@@ -7,7 +7,7 @@
 @section('content')
     <div class="w-full mb-6">
         <div class="border rounded">
-            <div class="border-b bg-grey-lightest rounded-t text-grey-darker font-semibold px-4 py-3">Charge {{ $order->charge_id }}</div>
+            <div class="border-b bg-grey-lightest rounded-t text-grey-darker font-semibold px-4 py-3">Order {{ $order->id }} ({{ $order->charge_id }})</div>
 
             <div class="bg-white rounded-b p-4">
                 <div class="mb-4">

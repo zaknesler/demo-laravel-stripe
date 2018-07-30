@@ -15,7 +15,7 @@
                         </div>
 
                         <div class="flex-1 text-right ml-4 self-center">
-                            <a class="inline-block border bg-grey-lightest rounded px-3 py-1 text-grey-darker no-underline" :href="'/products/' + product.id">View &rarr;</a>
+                            <a class="inline-block border hover:border-grey bg-grey-lightest rounded px-3 py-1 text-grey-darker no-underline" :href="'/products/' + product.id">View &rarr;</a>
                         </div>
                     </div>
 

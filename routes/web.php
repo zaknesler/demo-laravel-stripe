@@ -21,8 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/orders/{order}', 'OrderController@show');
+Route::get('/orders', 'OrderController@index')->name('orders.index');
+Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
 
-Route::get('/products/{product}', 'ProductController@show');
+Route::get('/products/{product}', 'ProductController@show')->name('products.show');
 
-Route::post('/products/{product}/purchase', 'ProductPurchaseController@store');
+Route::post('/products/{product}/purchase', 'ProductPurchaseController@store')->name('products.purchase');
