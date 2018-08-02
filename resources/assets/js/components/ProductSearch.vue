@@ -1,11 +1,15 @@
 <template>
     <div class="w-full">
         <div class="border rounded">
-            <div class="border-b bg-grey-lightest rounded-t text-grey-darker font-semibold px-4 py-3">Products</div>
+            <div class="border-b bg-grey-lightest rounded-t text-grey-darker font-semibold px-4 py-3">Products <span v-show="input" class="text-grey-dark font-normal">({{ filteredProducts.length }} matching search)</span></div>
 
             <div class="bg-white rounded-b p-4">
-               <div class="max-w-sm mx-auto -mb-4">
-                    <div v-if="products.length > 0" v-for="product in products" class="flex mb-4">
+                <div class="max-w-sm mx-auto -mb-4">
+                    <div class="mb-6">
+                        <input autofocus required type="text" v-model="input" placeholder="Search products..." class="block appearance-none outline-none w-full h-full border focus:border-grey bg-grey-lightest text-grey-darker p-3 rounded" />
+                    </div>
+
+                    <div v-if="filteredProducts" v-for="product in filteredProducts" class="flex mb-4">
                         <img class="block w-16 h-16 select-none pointer-events-none" :src="product.image" alt="Product Image" />
 
                         <div class="ml-4">
@@ -30,12 +34,25 @@
     export default {
         data() {
             return {
-                products: null
+                input: '',
+                products: []
             }
         },
 
         mounted() {
             axios.get('/api/products').then(({ data }) => this.products = data)
+        },
+
+        computed: {
+            filteredProducts() {
+                if (!this.products.length) {
+                    return [];
+                }
+
+                return this.products.filter(product => {
+                    return product.name.toLowerCase().includes(this.input.toLowerCase())
+                })
+            }
         }
     }
 </script>

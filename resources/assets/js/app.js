@@ -2,9 +2,11 @@ import './bootstrap'
 
 import PurchaseProduct from './components/PurchaseProduct.vue'
 import ProductSearch from './components/ProductSearch.vue'
+import QuantityPicker from './components/QuantityPicker.vue'
 
 Vue.component('purchase-product', PurchaseProduct)
 Vue.component('product-search', ProductSearch)
+Vue.component('quantity-picker', QuantityPicker)
 
 Number.prototype.format = function(n, x) {
     var re = '(\\d)(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';

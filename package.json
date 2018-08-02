@@ -17,6 +17,7 @@
         "less": "^3.0",
         "less-loader": "^4.1",
         "tailwindcss": "^0.6",
-        "vue": "^2.5"
+        "vue": "^2.5",
+        "vue-click-outside": "^1.0.7"
     }
 }

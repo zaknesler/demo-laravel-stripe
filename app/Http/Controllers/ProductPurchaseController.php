@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use Stripe\Charge;
 use Illuminate\Http\Request;
 
 class ProductPurchaseController extends Controller
@@ -22,7 +21,7 @@ class ProductPurchaseController extends Controller
         try {
             $customer = request()->user()->createStripeCustomer(request('token'));
 
-            $charge = Charge::create([
+            $charge = \Stripe\Charge::create([
                 'amount' => $product->price,
                 'currency' => 'usd',
                 'customer' => $customer['id'],

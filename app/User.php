@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Order;
-use Stripe\Customer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -39,7 +38,7 @@ class User extends Authenticatable
         //     return $this->getStripeCustomer();
         // }
 
-        $customer = collect(Customer::create([
+        $customer = collect(\Stripe\Customer::create([
             'email' => $this->email,
             'source' => $source,
         ]));

@@ -1,17 +1,17 @@
 @extends('layouts/base')
 
-@section('title', 'Home')
+@section('title', 'Cart')
 
 @section('show-header', true)
 
 @section('content')
     <div class="w-full mb-6">
         <div class="border rounded">
-            <div class="border-b bg-grey-lightest rounded-t text-grey-darker font-semibold px-4 py-3">Your orders</div>
+            <div class="border-b bg-grey-lightest rounded-t text-grey-darker font-semibold px-4 py-3">Your cart</div>
 
             <div class="bg-white rounded-b p-4">
                 <div class="max-w-sm mx-auto -mb-4">
-                    @foreach($orders as $order)
+                    @foreach($cartItems as $cartItem)
                         <a class="w-full border hover:border-grey rounded text-grey-darker bg-grey-lightest px-4 py-3 mb-4 flex items-center justify-between no-underline" href="{{ route('orders.show', $order) }}">
                             <div>
                                 <div class="flex items-center font-mono tracking-tight">

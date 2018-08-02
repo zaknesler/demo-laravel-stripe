@@ -13,19 +13,25 @@
                 <div class="flex flex-col md:flex-row">
                     <img class="block w-48 h-48 rounded select-none pointer-events-none" src="{{ $product->image }}" alt="Product Image" />
 
-                    <div class="mt-4 md:mt-0 md:ml-4">
-                        <div class="text-grey-darkest text-xl font-semibold mb-2">{{ $product->name }}</div>
+                    <div class="mt-4 md:mt-0 md:ml-4 flex flex-col justify-between">
+                        <div>
+                            <div class="text-grey-darkest text-xl font-semibold mb-2">{{ $product->name }}</div>
 
-                        <div class="mb-4">{{ $product->description }}</div>
+                            <div class="mb-4">{{ $product->description }}</div>
+                        </div>
 
-                        <div class="text-xl text-grey-darkest">${{ number_format($product->price / 100, 2) }}</div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xl text-grey-darkest">${{ number_format($product->price / 100, 2) }}</div>
+
+                            <quantity-picker :max="10" text="Add to Cart" name="quantity"></quantity-picker>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    @auth
+    {{-- @auth
         <purchase-product :product="{{ $product }}"></purchase-product>
-    @endauth
+    @endauth --}}
 @endsection
