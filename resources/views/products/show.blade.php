@@ -23,7 +23,7 @@
                         <div class="flex justify-between items-center">
                             <div class="text-xl text-grey-darkest">${{ number_format($product->price / 100, 2) }}</div>
 
-                            <quantity-picker :max="10" text="Add to Cart" name="quantity"></quantity-picker>
+                            <quantity-picker text="Add to Cart" name="quantity"></quantity-picker>
                         </div>
                     </div>
                 </div>
