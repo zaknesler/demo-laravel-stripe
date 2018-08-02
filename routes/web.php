@@ -27,7 +27,7 @@ Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
 Route::get('/products/{product}', 'ProductController@show')->name('products.show');
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
-Route::post('/cart/add/{product}/{quantity}', 'CartController@add')->name('cart.add')
-    ->where('quantity', '[0-9]+');
+Route::post('/cart/add/{product}', 'CartController@add')->name('cart.add');
+Route::post('/cart/checkout', 'CartCheckoutController@store')->name('cart.checkout');
 
 Route::post('/products/{product}/purchase', 'ProductPurchaseController@store')->name('products.purchase');

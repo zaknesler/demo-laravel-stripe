@@ -28,8 +28,14 @@ class Order extends Model
         'charged_at',
     ];
 
+    public function addProduct($product, $quantity)
+    {
+        $this->products()->attach($product, ['quantity' => $quantity]);
+    }
+
     public function products()
     {
-        return $this->belongsToMany(Product::class)->using(OrderProduct::class);
+        return $this->belongsToMany(Product::class)->using(OrderProduct::class)
+            ->withPivot('quantity');
     }
 }

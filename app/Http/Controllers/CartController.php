@@ -8,20 +8,28 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
-    public function add(Product $product, $quantity = 1)
+    public function add(Product $product)
     {
-        Cart::instance('shopping')->add($product, $quantity);
+        request()->validate([
+            'quantity' => 'required|integer|min:1|max:10',
+        ]);
 
-        Cart::instance('shopping')->store(auth()->id());
+        Cart::instance('shopping')->add($product, (int) request('quantity'));
+
+        return redirect()->route('cart.index');
     }
 
     public function index()
     {
-        $this->add(Product::first(), 1);
-        $items = Cart::instance('shopping')->content();
+        $items = Cart::instance('shopping')->content()->sortBy('id');
 
-        dd($items);
+        return view('cart.index', compact('items'));
+    }
 
-        return view('cart.index');
+    public function destroy()
+    {
+        Cart::instance('shopping')->destroy();
+
+        return redirect('cart.index');
     }
 }

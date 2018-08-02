@@ -26,9 +26,9 @@ return [
 
     'database' => [
 
-        'connection' => 'sqlite',
+        'connection' => null,
 
-        'table' => 'carts',
+        'table' => 'shoppingcart',
 
     ],
 

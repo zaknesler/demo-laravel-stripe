@@ -14,6 +14,15 @@ class OrderProduct extends Pivot
      */
     protected $table = 'order_product';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'quantity',
+    ];
+
     public function order()
     {
         return $this->belongsTo(Order::class);

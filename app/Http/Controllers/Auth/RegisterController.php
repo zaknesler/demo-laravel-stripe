@@ -70,8 +70,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        Cart::instance('shopping')->store($user->id);
-
         return $user;
     }
 }

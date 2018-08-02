@@ -23,15 +23,15 @@
                         <div class="flex justify-between items-center">
                             <div class="text-xl text-grey-darkest">${{ number_format($product->price / 100, 2) }}</div>
 
-                            <quantity-picker text="Add to Cart" name="quantity"></quantity-picker>
+                            <form action="{{ route('cart.add', $product) }}" method="POST">
+                                @csrf
+
+                                <quantity-picker text="Add to Cart" name="quantity"></quantity-picker>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- @auth
-        <purchase-product :product="{{ $product }}"></purchase-product>
-    @endauth --}}
 @endsection

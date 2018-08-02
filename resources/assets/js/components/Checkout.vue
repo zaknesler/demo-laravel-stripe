@@ -1,23 +1,25 @@
 <template>
     <div class="w-full">
         <div class="border rounded">
-            <div class="border-b bg-grey-lightest rounded-t text-grey-darker font-semibold px-4 py-3">Payment</div>
+            <div class="border-b bg-grey-lightest rounded-t text-grey-darker font-semibold px-4 py-3">Checkout</div>
 
             <div class="bg-white rounded-b text-center p-4 md:py-16">
-                <div>Pay now with your credit or debit card</div>
+                <div class="max-w-xs mx-auto">
+                    <div>
+                        <div v-for="item in items" class="w-full border rounded bg-grey-lightest px-4 py-3 mb-4 flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="font-semibold" v-text="item.qty"></div>
 
-                <div class="max-w-xs my-8 mx-auto">
-                    <div class="w-full border rounded bg-grey-lightest px-4 py-3 mb-4 flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="font-semibold">1</div>
+                                <svg class="mx-2 w-2 h-2 text-grey-darker fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
 
-                            <svg class="mx-2 w-2 h-2 text-grey-darker fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
+                                <div class="text-left" v-text="item.name"></div>
+                            </div>
 
-                            <div class="text-left">{{ product.name }}</div>
+                            <div class="ml-4 font-mono text-grey-dark">${{ item.subtotal.format(2) }}</div>
                         </div>
-
-                        <div class="ml-4 font-mono text-grey-dark">${{ (product.price / 100).format(2) }}</div>
                     </div>
+
+                    <div class="my-8">Pay now with your credit or debit card</div>
 
                     <div class="w-full border rounded bg-grey-lightest p-4" ref="card"></div>
 
@@ -30,7 +32,7 @@
                     </transition>
                 </div>
 
-                <button :disabled="buttonDisabled" :class="{ 'opacity-75 select-none pointer-events-none cursor-not-allowed': buttonDisabled }" class="block mx-auto text-center bg-blue hover:bg-blue-dark flex items-center justify-center focus:outline-none text-white rounded px-6 py-3" @click.prevent="makePurchase">
+                <button :disabled="buttonDisabled" :class="{ 'opacity-75 select-none pointer-events-none cursor-not-allowed': buttonDisabled }" class="mt-8 block mx-auto text-center bg-blue hover:bg-blue-dark flex items-center justify-center focus:outline-none text-white rounded px-6 py-3" @click.prevent="makePurchase">
                     <div v-text="processing ? 'Processing...' : 'Purchase'"></div>
                 </button>
             </div>
@@ -52,7 +54,7 @@
         elements = stripe.elements()
 
     export default {
-        props: ['product'],
+        props: ['items'],
 
         data() {
             return {
@@ -98,7 +100,7 @@
                             return
                         }
 
-                        axios.post(`/products/${this.product.id}/purchase`, {token: token.id})
+                        axios.post(`/cart/checkout`, {token: token.id})
                             .then(({ data }) => {
                                 window.location.href = `/orders/${data.id}`
                             })

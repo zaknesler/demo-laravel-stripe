@@ -1,10 +1,10 @@
 import './bootstrap'
 
-import PurchaseProduct from './components/PurchaseProduct.vue'
+import Checkout from './components/Checkout.vue'
 import ProductSearch from './components/ProductSearch.vue'
 import QuantityPicker from './components/QuantityPicker.vue'
 
-Vue.component('purchase-product', PurchaseProduct)
+Vue.component('checkout', Checkout)
 Vue.component('product-search', ProductSearch)
 Vue.component('quantity-picker', QuantityPicker)
 

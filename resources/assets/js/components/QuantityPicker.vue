@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <button class="block appearance-none no-underline text-white text-sm bg-blue hover:bg-blue-dark focus:outline-none px-4 py-2 rounded-r" v-html="text"></button>
+        <button type="submit" class="block appearance-none no-underline text-white text-sm bg-blue hover:bg-blue-dark focus:outline-none px-4 py-2 rounded-r" v-html="text"></button>
 
         <input type="hidden" :name="name" :value="selected" />
     </div>
