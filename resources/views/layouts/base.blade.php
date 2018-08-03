@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" class="h-full">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +13,7 @@
         <script src="https://js.stripe.com/v3/" defer></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans font-normal roman text-base tracking-normal leading-normal bg-white text-grey-darker antialiased">
+    <body class="font-sans font-normal roman text-base tracking-normal leading-normal bg-white text-grey-darker antialiased min-h-full h-full">
         <div id="app" class="min-h-full h-full" v-cloak>
             @hasSection('show-header')
                 @include('layouts/partials/_header')

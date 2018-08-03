@@ -49,15 +49,15 @@
                         </div>
 
                         <div class="block mb-4">
-                            <label class="flex items-center select-none" for="remember">
-                                <input class="checkbox-slider" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
+                            <label class="flex items-center cursor-pointer select-none" for="remember">
+                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
 
                                 <span class="text-sm ml-2">Keep me signed in</span>
                             </label>
                         </div>
 
                         <div class="block mb-8">
-                            <input class="appearance-none w-full border-0 bg-blue hover:bg-blue-dark text-white rounded cursor-pointer p-3" type="submit" value="Login" />
+                            <input class="appearance-none w-full text-sm uppercase tracking-wide font-semibold border-0 bg-blue hover:bg-blue-dark text-white rounded cursor-pointer p-3 shadow" type="submit" value="Log In" />
                         </div>
 
                         <div class="text-center text-sm text-grey-dark">

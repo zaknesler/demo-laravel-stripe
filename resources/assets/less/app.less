@@ -1,17 +1,6 @@
-
 @tailwind preflight;
-
 @tailwind components;
-
 @tailwind utilities;
-
-html {
-    @apply .h-full;
-}
-
-body {
-    @apply .min-h-full .h-full;
-}
 
 [v-cloak] {
     @apply .hidden;
@@ -25,33 +14,34 @@ body {
     @apply .opacity-0;
 }
 
-.checkbox-slider {
-    @apply .relative .bg-grey-light .border .overflow-hidden .rounded-full .outline-none .appearance-none .cursor-pointer;
+input[type=checkbox] {
+    @apply .relative .border .bg-grey-lighter .rounded-sm .outline-none .appearance-none .cursor-pointer .overflow-hidden .w-4 .h-4;
 
-    width: 36px;
-    height: 18px;
-    clip: rect(0,0,0,0);
-    transition: background 150ms ease;
+    transition: background 100ms ease-in-out;
 
     &:focus,
-    &:active {
+    &:active,
+    &:checked {
         @apply .border-blue;
     }
 
     &::after {
-        @apply .absolute .block .bg-white .rounded-full;
+        @apply .block .absolute .opacity-0;
 
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 20 20'%3E%3Cpath d='M0 11l2-2 5 5L18 3l2 2L7 18z'/%3E%3C/svg%3E");
         content: '';
-        width: calc(100% / 2);
-        height: 100%;
-        transition: all 150ms ease;
+        width: calc(100% - 4px);
+        height: calc(100% - 4px);
+        top: 2px;
+        left: 2px;
+        transition: opacity 100ms ease-in-out;
     }
 
     &:checked {
-        @apply .bg-blue .border-blue;
+        @apply .bg-blue;
 
         &::after {
-            transform: translateX(100%);
+            @apply .opacity-100;
         }
     }
 }
