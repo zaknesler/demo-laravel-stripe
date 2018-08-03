@@ -41,17 +41,7 @@
 </template>
 
 <script>
-    const tailwindConfig = require('../../../../tailwind.js')
-
-    const style = {
-        base: {
-            fontFamily: tailwindConfig.fonts.sans.toString(),
-            color: tailwindConfig.colors['grey-darker']
-        }
-    }
-
-    const stripe = Stripe(process.env.MIX_STRIPE_KEY),
-        elements = stripe.elements()
+    const stripe = Stripe(process.env.MIX_STRIPE_KEY)
 
     export default {
         props: ['items'],
@@ -59,17 +49,24 @@
         data() {
             return {
                 card: undefined,
-
                 buttonDisabled: true,
-
                 processing: false,
-
                 error: ''
             }
         },
 
         mounted() {
-            this.card = elements.create('card', { style })
+            const tailwindConfig = require('../../../../tailwind.js')
+
+            this.card = stripe.elements().create('card', {
+                style: {
+                    base: {
+                        fontFamily: tailwindConfig.fonts.sans.toString(),
+                        color: tailwindConfig.colors['grey-darker']
+                    }
+                }
+            })
+
             this.card.mount(this.$refs.card)
 
             this.card.addEventListener('change', (event) => {
@@ -100,10 +97,8 @@
                             return
                         }
 
-                        axios.post(`/cart/checkout`, {token: token.id})
-                            .then(({ data }) => {
-                                window.location.href = `/orders/${data.id}`
-                            })
+                        axios.post(`/cart/checkout`, { token: token.id })
+                            .then(({ data }) => window.location.href = `/orders/${data.id}`)
                             .catch(({ response }) => {
                                 this.error = response.data.message
                                 this.setWorking(false)

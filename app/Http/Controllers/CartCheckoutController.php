@@ -8,6 +8,11 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartCheckoutController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -37,8 +42,6 @@ class CartCheckoutController extends Controller
                 'charge_amount' => $total,
                 'card_last_four' => $charge['source']['last4'],
             ]);
-
-            $products = Product::find($cart->content()->pluck('id'));
 
             $cart->content()->each(function ($item) use ($order) {
                 $order->addProduct($item->id, $item->qty);

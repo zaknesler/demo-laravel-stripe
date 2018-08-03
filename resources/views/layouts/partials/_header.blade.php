@@ -22,7 +22,7 @@
             <div class="mt-6 md:mt-0">
                 <ul class="flex flex-col sm:flex-row list-reset -mb-6 md:-mr-6 md:mb-0">
                     @auth
-                        <li class="mb-6 md:mr-6 md:mb-0"><a class="block md:inline text-blue-dark no-underline hover:underline" href="{{ route('cart.index') }}">Cart ({{ Cart::instance('shopping')->count() }})</li>
+                        <li class="mb-6 md:mr-6 md:mb-0"><a class="block md:inline text-blue-dark no-underline hover:underline" href="{{ route('cart.index') }}">Cart ({{ $cart->count() }})</li>
                         <li class="mb-6 md:mr-6 md:mb-0"><a class="block md:inline text-blue-dark no-underline hover:underline" href="{{ route('orders.index') }}">Your Orders</a></li>
                         <li class="mb-6 md:mr-6 md:mb-0"><a class="block md:inline text-blue-dark no-underline hover:underline" href="{{ route('orders.index') }}">Account</a></li>
                         <li class="mb-6 md:mr-6 md:mb-0"><a class="block md:inline text-blue-dark no-underline hover:underline" href="#" @click.prevent="logout">Logout</a></li>
