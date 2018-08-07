@@ -13,6 +13,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'charge_id',
         'charge_amount',
         'card_last_four',
@@ -27,6 +28,24 @@ class Order extends Model
     protected $dates = [
         'charged_at',
     ];
+
+    /**
+     * Create an order based on the attributes of a charge.
+     *
+     * @param  \Stripe\Charge $charge
+     * @param  App\User $user
+     * @return App\Order
+     */
+    public static function createForCharge(\Stripe\Charge $charge, $user)
+    {
+        return self::create([
+            'user_id' => $user->id,
+            'charge_id' => $charge['id'],
+            'charged_at' => $charge['created'],
+            'charge_amount' => $charge['amount'],
+            'card_last_four' => $charge['source']['last4'],
+        ]);
+    }
 
     public function addProduct($product, $quantity)
     {
