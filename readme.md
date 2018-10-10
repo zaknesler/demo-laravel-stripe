@@ -1,1 +1,1 @@
-This is a result of me messing about with the Stripe PHP API and some fun Vue components.
+Literally just me having messed about with some Vue components and Stripe APIs. Idk just me learning some stuff.
