@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="block mb-8">
-                            <input class="appearance-none w-full text-sm uppercase tracking-wide font-semibold border-0 bg-blue hover:bg-blue-dark text-white rounded cursor-pointer p-3 shadow" type="submit" value="Log In" />
+                            <input class="appearance-none w-full border-0 bg-blue hover:bg-blue-dark text-white rounded cursor-pointer p-3" type="submit" value="Log In" />
                         </div>
 
                         <div class="text-center text-sm text-grey-dark">
