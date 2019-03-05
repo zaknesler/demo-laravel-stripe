@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -36,12 +37,7 @@ class CartCheckoutController extends Controller
                 'receipt_email' => $customer['email'],
             ]);
 
-            $order = request()->user()->orders()->create([
-                'charge_id' => $charge['id'],
-                'charged_at' => $charge['created'],
-                'charge_amount' => $total,
-                'card_last_four' => $charge['source']['last4'],
-            ]);
+            $order = Order::createForCharge($charge, request()->user());
 
             $cart->content()->each(function ($item) use ($order) {
                 $order->addProduct($item->id, $item->qty);
@@ -53,7 +49,7 @@ class CartCheckoutController extends Controller
         } catch (\Stripe\Error\Base $exception) {
             return response()->json(['message' => $exception->getMessage()], 403);
         } catch (\Exception $exception) {
-            return response()->json(['message' => 'Something went wrong.'], 403);
+            return response()->json(['message' => $exception->getMessage()], 403);
         }
     }
 }
